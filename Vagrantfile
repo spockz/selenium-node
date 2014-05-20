@@ -9,8 +9,10 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.ssh.forward_agent = true
   config.vm.network "public_network"
+  config.vm.network :forwarded_port, guest:9222, host:9222
 
   config.vm.provider "virtualbox" do |v|
+  v.gui = true
     v.memory = 2048
     v.cpus = 2
   end
@@ -25,6 +27,5 @@ Vagrant.configure("2") do |config|
   # end
 
   config.vm.provision :shell, :path => "setup.sh"
-  # config.vm.network :forwarded_port, guest:4444, host:4444
 
 end
